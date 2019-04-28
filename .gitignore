@@ -41,3 +41,4 @@ log/
 target/
 
 .gradle/
+**/*.hprof
