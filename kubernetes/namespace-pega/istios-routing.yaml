@@ -1,0 +1,54 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: fnx-gateway
+  namespace: pega
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      #mode: MUTUAL
+      mode: SIMPLE
+      serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+      privateKey: /etc/istio/ingressgateway-certs/tls.key
+      caCertificates: /etc/istio/ingressgateway-ca-certs/ca-chain.cert.pem
+    hosts:
+    #- "student.example.com"
+    - "*"
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: student-service
+  namespace: pega
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - fnx-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /search
+    - uri:
+        prefix: /student/search
+    - uri:
+        prefix: /student    
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: student-service.pega.svc.cluster.local
