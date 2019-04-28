@@ -1,6 +1,6 @@
 package com.prapps.tutorial.spring.netflix.db;
 
-import com.prapps.tutorial.spring.netflix.db.entity.Course;
+import com.prapps.tutorial.spring.netflix.db.entity.CourseEntity;
 import com.prapps.tutorial.spring.netflix.db.repo.CourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +30,7 @@ public class CourseResource {
     }
 
     @GetMapping("/all")
-    public List<Course> getAllCourses() {
+    public List<CourseEntity> getAllCourses() {
         return courseRepo.findAll();
     }
 }

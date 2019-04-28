@@ -1,17 +1,24 @@
 package com.prapps.tutorial.spring.netflix.db;
 
 
-import com.prapps.tutorial.spring.netflix.db.entity.Student;
+import com.prapps.tutorial.spring.netflix.db.entity.StudentEntity;
 import com.prapps.tutorial.spring.netflix.db.repo.CourseRepo;
 import com.prapps.tutorial.spring.netflix.db.repo.StudentRepo;
+import com.prapps.tutorial.spring.netflix.student.Student;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rest/db/student")
 public class StudentResource {
+    private static final Logger LOG = LoggerFactory.getLogger(StudentResource.class);
 
     private StudentRepo studentRepo;
     private CourseRepo courseRepo;
@@ -24,19 +31,28 @@ public class StudentResource {
 
     @GetMapping("/{name}")
     public List<Student> findStudent(@PathVariable String name) {
-        System.out.println("hashCode: "+this.hashCode());
-        return studentRepo.findByFirstNameIgnoreCaseOrLastNameIgnoreCase(name, name);
+        LOG.debug("hashCode: "+this.hashCode());
+        List<Student> students = new ArrayList<>();
+        return studentRepo.findByFirstNameIgnoreCaseOrLastNameIgnoreCase(name, name).stream().map(entity -> {
+            Student student = new Student();
+            BeanUtils.copyProperties(entity, student);
+            return student;
+        }).collect(Collectors.toList());
     }
 
     @PostMapping("/register")
-    public Student register(@RequestParam("studentId") Long studentId, @RequestParam("courseId") Long courseId) {
-        Student student = studentRepo.findById(studentId).get();
-        student.getRegisteredCourses().add(courseRepo.findById(courseId).get());
-        return studentRepo.save(student);
+    public StudentEntity register(@RequestParam("studentId") Long studentId, @RequestParam("courseId") Long courseId) {
+        StudentEntity studentEntity = studentRepo.findById(studentId).get();
+        studentEntity.getRegisteredCourses().add(courseRepo.findById(courseId).get());
+        return studentRepo.save(studentEntity);
     }
 
     @PostMapping
     public Student addStudent(@RequestBody Student student) {
-        return studentRepo.save(student);
+        StudentEntity entity = new StudentEntity();
+        BeanUtils.copyProperties(student, entity);
+        Student savedStudent = new Student();
+        BeanUtils.copyProperties(studentRepo.save(entity), savedStudent);
+        return savedStudent;
     }
 }

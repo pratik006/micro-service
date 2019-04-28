@@ -5,9 +5,13 @@ pluginManagement {
 }
 rootProject.name = 'micro-services'
 
-include 'eureka-server', 'zuul-server'
+include('public-api')
+
 include('db-service')
 project(':db-service').projectDir = file('services/db-service')
 include('student-service')
 project(':student-service').projectDir = file('services/student-service')
+include('email-service')
+project(':email-service').projectDir = file('services/email-service')
+
 

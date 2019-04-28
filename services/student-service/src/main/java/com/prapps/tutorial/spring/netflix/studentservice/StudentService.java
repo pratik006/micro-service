@@ -1,5 +1,7 @@
 package com.prapps.tutorial.spring.netflix.studentservice;
 
+import com.prapps.tutorial.spring.netflix.student.Student;
+import com.prapps.tutorial.spring.netflix.student.StudentSearchResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,6 +26,9 @@ public class StudentService {
 
     @Value("${services.core-api.student-endpoint}")
     private String studentEndpoint;
+
+    @Value("${services.email-service.endpoint}")
+    private String emailEndpoint;
 
     @Autowired
     public StudentService(RestTemplate restTemplate) {
@@ -42,9 +48,16 @@ public class StudentService {
 
     @PostMapping
     public Student addStudent(@RequestBody Student student) {
+        if (!StringUtils.isEmpty(student.getEmail())) {
+            sendEmail(student.getEmail());
+        }
         return restTemplate.postForObject(studentEndpoint, student, Student.class);
     }
 
+    @Async
+    void sendEmail(String emailId) {
+        restTemplate.postForObject(emailEndpoint, emailId, Student.class);
+    }
 
     @GetMapping("/tryluck")
     public String tryLuck() {

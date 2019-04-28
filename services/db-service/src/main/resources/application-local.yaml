@@ -1,0 +1,28 @@
+###
+#   Database Settings
+###
+spring:
+  application:
+    name: db-service
+  datasource:
+    url: jdbc:h2:mem:%s;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    platform: H2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        #show_sql: true
+        #use_sql_comments: true
+        #format_sql: true
+logging:
+  level:
+    com.prapps: DEBUG
+server:
+  port: 8080
+

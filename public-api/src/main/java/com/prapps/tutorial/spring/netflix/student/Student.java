@@ -1,19 +1,14 @@
-package com.prapps.tutorial.spring.netflix.db.entity;
+package com.prapps.tutorial.spring.netflix.student;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity
 public class Student {
-    @Id
-    @GeneratedValue
     private Long id;
     private String firstName;
     private String lastName;
+    private String email;
+    private List<String> messages;
 
     public Student() { }
 
@@ -21,9 +16,6 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    @OneToMany
-    private Set<Course> registeredCourses;
 
     public Long getId() {
         return id;
@@ -49,15 +41,23 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public Set<Course> getRegisteredCourses() {
-        if (registeredCourses == null) {
-            registeredCourses = new HashSet<>();
-        }
-
-        return registeredCourses;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRegisteredCourses(Set<Course> registeredCourses) {
-        this.registeredCourses = registeredCourses;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<String> getMessages() {
+        if (messages == null) {
+            messages = new ArrayList<>();
+        }
+
+        return messages;
+    }
+
+    public void setMessages(List<String> messages) {
+        this.messages = messages;
     }
 }

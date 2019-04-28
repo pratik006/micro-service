@@ -6,16 +6,16 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Course {
+public class CourseEntity {
     @Id
     @GeneratedValue
     private Long id;
     private String name;
     private String duration;
 
-    public Course() { }
+    public CourseEntity() { }
 
-    public Course(String name, String duration) {
+    public CourseEntity(String name, String duration) {
         this.name = name;
         this.duration = duration;
     }
@@ -49,8 +49,8 @@ public class Course {
     }
 
     public boolean equals(Object other) {
-        if (other instanceof Course) {
-            Course otherCourse = (Course) other;
+        if (other instanceof CourseEntity) {
+            CourseEntity otherCourse = (CourseEntity) other;
             return Objects.equals(id, otherCourse.getId())
                     && Objects.equals(duration, otherCourse.getDuration())
                     && Objects.equals(name, otherCourse.getName());

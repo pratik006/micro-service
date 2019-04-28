@@ -1,4 +1,4 @@
-package com.prapps.tutorial.spring.netflix.studentservice;
+package com.prapps.tutorial.spring.netflix.student;
 
 import java.util.ArrayList;
 import java.util.List;

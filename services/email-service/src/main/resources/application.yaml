@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: email-service
+server:
+  port: 8080
+
+services:
+  core-api:
+    host: ${CORE_API_HOST}
+logging:
+  level:
+    root: INFO
+    com.pega: DEBUG
+    org.springframework.web: DEBUG
+#    org.hibernate: ERROR
+

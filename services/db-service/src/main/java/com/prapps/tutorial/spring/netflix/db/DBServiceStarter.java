@@ -28,9 +28,9 @@ public class DBServiceStarter {
     //for setting up initial data
     /*@EventListener(ApplicationReadyEvent.class)
     public void initData(final ApplicationReadyEvent event) {
-        event.getApplicationContext().getBean(StudentRepo.class).saveAll(Stream.<Student>of(
-                new Student("Pratik", "Sengupta"),
-                new Student("Pratik", "Das"))
+        event.getApplicationContext().getBean(StudentRepo.class).saveAll(Stream.<StudentEntity>of(
+                new StudentEntity("Pratik", "Sengupta"),
+                new StudentEntity("Pratik", "Das"))
                 .collect(Collectors.toSet()));
     }*/
 }
