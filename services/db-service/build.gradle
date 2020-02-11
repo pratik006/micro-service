@@ -2,7 +2,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 
-    compile 'mysql:mysql-connector-java'
     compile 'org.postgresql:postgresql:42.2.5'
 
     //compile 'com.h2database:h2'

@@ -22,6 +22,11 @@ public class StudentResource {
         this.courseRepo = courseRepo;
     }
 
+    @GetMapping
+    public List<Student> getAllStudents() {
+        return studentRepo.findAll();
+    }
+
     @GetMapping("/{name}")
     public List<Student> findStudent(@PathVariable String name) {
         System.out.println("hashCode: "+this.hashCode());

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  myvalue: "Hello World"
+  DB_PLATFORM: "postgresql"
+  DB_HOST: "{{ .Release.Name }}-postgresql"
+  DB_PORT: "5432"
+  DATABASE: "test"
+  DB_USER: "postgres"
+  DB_PASSWORD: "postgres"
+  DB_DRIVER_CLASS_NAME: "org.postgresql.Driver"
+  DB_DIALECT: "org.hibernate.dialect.PostgreSQLDialect"
