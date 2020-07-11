@@ -52,3 +52,27 @@ spec:
         port:
           number: 8080
         host: student-service.pega.svc.cluster.local
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: pega-service
+  namespace: pega
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - fnx-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /prweb
+    - uri:
+        prefix: /prweb/
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: pega-service.pega.svc.cluster.local        
