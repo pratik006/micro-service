@@ -1,0 +1,28 @@
+###
+#   Database Settings
+###
+spring:
+  application:
+    name: db-service
+  datasource:
+    url: jdbc:${DB_PLATFORM}://${DB_HOST}:${DB_PORT}/${DATABASE:test}
+    platform: ${DB_PLATFORM}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driverClassName: ${DB_DRIVER_CLASS_NAME:org.postgresql.Driver}
+
+  jpa:
+    database-platform: ${DB_DIALECT}
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        #show_sql: true
+        #use_sql_comments: true
+        #format_sql: true
+
+server:
+  port: 8080
+#logging:
+#  level:
+#    org.springframework: DEBUG
