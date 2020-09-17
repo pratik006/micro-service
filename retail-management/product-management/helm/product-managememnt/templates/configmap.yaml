@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-management-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  myvalue: {{ .Values.helloWorld }}

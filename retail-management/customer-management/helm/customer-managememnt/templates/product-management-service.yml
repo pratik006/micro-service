@@ -1,0 +1,48 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: customer-service
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-service
+  template:
+    metadata:
+      labels:
+        app: customer-service
+    spec:
+      containers:
+        - name: customer-service-pod
+          image: customer-management:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+      #imagePullPolicy: IfNotPresent
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-service
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: customer-service
+  ports:
+    - name: http
+      protocol: TCP
+      # Which port on the node is the service available through?
+      nodePort: 32003
+      # Inside the cluster, what port does the service expose?
+      port: 8080
+      # Which port do pods selected by this service expose?
+      targetPort: 8080
+  type: LoadBalancer

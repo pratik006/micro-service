@@ -1,0 +1,19 @@
+kafka:
+  external:
+    enabled: true
+    type: NodePort
+  configurationOverrides:
+    advertised.listeners: |-
+      EXTERNAL://kafka.cluster.local:$((31090 + ${KAFKA_BROKER_ID}))
+    listener.security.protocol.map: |-
+      PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+
+postgresql:
+  postgresqlPassword: postgres
+  postgresqlDatabase: postgres
+  service:
+    type: NodePort
+    nodePort: 31432
+
+helloWorld: Hello world !
+namespace: retail

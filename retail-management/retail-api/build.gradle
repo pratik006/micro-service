@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'maven-publish'
+}
+
+group = "com.prapps.retail-management"
+version = "1.0"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    //jcenter()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
