@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pega-service
+  namespace: pega
+  labels:
+    app: pega-service
+    version: v1
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: pega-service
+    spec:
+      containers:
+        - name: pega-service-pod
+          image: pega-docker:latest
+          imagePullPolicy: "Never"
+          ports:
+            - containerPort: 8080
+          env:
+          - name: CORE_API_HOST
+            value: http://db-service.pega:8080
+          - name: CORE_API_STUDENT_ENDPOINT
+            value: rest/db/student
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pega-service
+  namespace: pega
+spec:
+  selector:
+    app: pega-service
+  ports:
+    - name: http
+      protocol: TCP
+      # Which port on the node is the service available through from outside cluster?
+      nodePort: 32012
+      # Inside the cluster, what port does the service expose?
+      port: 8080
+      # Which port do pods selected by this service expose?
+      targetPort: 8080
+  type: LoadBalancer

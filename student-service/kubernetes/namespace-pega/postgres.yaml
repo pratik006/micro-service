@@ -6,7 +6,7 @@ metadata:
   labels:
     app: postgres
 data:
-  POSTGRES_DB: test
+  POSTGRES_DB: postgres
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
 ---
@@ -26,7 +26,7 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/data"
+    path: "/data/pv0001/"
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -41,7 +41,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
+      storage: 5Gi
 
 ---
 
@@ -84,8 +84,10 @@ metadata:
   name: postgres
   namespace: pega
 spec:
+  type: NodePort
   ports:
-  - port: 5432
+  - nodePort: 30010
+    port: 5432
   selector:
     app: postgres
-  clusterIP: None
+  #clusterIP: None
