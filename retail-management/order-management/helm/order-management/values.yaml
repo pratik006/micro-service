@@ -1,0 +1,14 @@
+postgresql:
+  postgresqlPassword: postgres
+  postgresqlDatabase: postgres
+  service:
+    type: NodePort
+    nodePort: 31433
+
+helloWorld: Hello world !
+namespace: retail
+DB_HOST: customer-test-release-postgresql
+DB_PORT: 5432
+POSTGRES_DB: postgres
+POSTGRES_USER: postgres
+POSTGRES_PASSWORD: postgres

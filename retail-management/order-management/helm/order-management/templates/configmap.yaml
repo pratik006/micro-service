@@ -3,5 +3,3 @@ kind: ConfigMap
 metadata:
   name: order-management-configmap
   namespace: {{ .Values.namespace }}
-data:
-  myvalue: {{ .Values.helloWorld }}

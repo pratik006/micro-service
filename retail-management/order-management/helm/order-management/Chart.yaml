@@ -23,10 +23,8 @@ version: 0.1.0
 appVersion: 1.16.0
 
 
-#dependencies:
-#  - name: kafka
-#    repository: https://kubernetes-charts-incubator.storage.googleapis.com/
-#  - name: postgresql
-#    version: 9.2.1
-#    repository: https://charts.bitnami.com/bitnami
-#    condition: postgresql.enabled
+dependencies:
+  - name: postgresql
+    version: 9.2.1
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled

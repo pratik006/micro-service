@@ -1,17 +1,18 @@
 server:
   port: 8080
-spring.datasource:
-  url: jdbc:h2:mem:testdb
-  driverClassName: org.h2.Driver
-  username: sa
-  password: password
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
   jpa:
     show-sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      hbm2ddl:
-        auto:update
-    properties.hibernate.format_sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+        hbm2ddl.auto: update
 
-logging.level.org.hibernate.SQL: DEBUG
-logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+#logging.level.org.hibernate.SQL: DEBUG
+#logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE

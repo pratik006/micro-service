@@ -3,32 +3,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-service
-  namespace: {{ .Values.namespace }}
+  name: customer-service
   labels:
-    app: order-service
+    app: customer-service
     version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: order-service
+      app: customer-service
   template:
     metadata:
       labels:
-        app: order-service
+        app: customer-service
     spec:
       containers:
-        - name: order-service-pod
-          image: order-management:latest
+        - name: customer-service-pod
+          image: customer-management:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
           env:
-            - name: CUSTOMER_APP.URL
-              value: customer-service:8080/customer
-            - name: PRODUCT_APP.URL
-              value: product-service:8080/product
+            - name: DB_HOST
+              value: "{{ .Values.DB_HOST }}"
+            - name: DB_PORT
+              value: "{{ .Values.DB_PORT }}"
+            - name: POSTGRES_DB
+              value: "{{ .Values.POSTGRES_DB }}"
+            - name: POSTGRES_USER
+              value: "{{ .Values.POSTGRES_USER }}"
+            - name: POSTGRES_PASSWORD
+              value: "{{ .Values.POSTGRES_PASSWORD }}"
       #imagePullPolicy: IfNotPresent
 
 ---
@@ -36,16 +41,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: order-service
-  namespace: {{ .Values.namespace }}
+  name: customer-service
 spec:
   selector:
-    app: order-service
+    app: customer-service
   ports:
     - name: http
       protocol: TCP
       # Which port on the node is the service available through?
-      nodePort: 32004
+      nodePort: 32001
       # Inside the cluster, what port does the service expose?
       port: 8080
       # Which port do pods selected by this service expose?

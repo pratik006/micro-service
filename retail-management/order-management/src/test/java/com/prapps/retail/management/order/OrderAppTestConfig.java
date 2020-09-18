@@ -6,12 +6,12 @@ import com.prapps.retail.management.order.feign.ProductServiceClient;
 import com.prapps.retail.management.product.Product;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
 @SpringBootApplication
-@Profile("test")
+@ActiveProfiles("test")
 public class OrderAppTestConfig {
     @Bean
     ProductServiceClient mockProductServiceClient() {
