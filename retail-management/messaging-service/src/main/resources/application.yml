@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      groupId: notificationListener
+      topic: placedOrders
+      enable-auto-commit: true
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      #properties.spring.json.value.default.type: com.prapps.retail.management.order.Order
+      properties.spring.json.trusted.packages: "com.prapps.retail.management.order"
+
+#logging.level.org.hibernate.SQL: DEBUG
+#logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE

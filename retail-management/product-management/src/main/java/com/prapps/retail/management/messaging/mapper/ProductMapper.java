@@ -1,7 +1,7 @@
-package com.prapps.retail.management.product.mapper;
+package com.prapps.retail.management.messaging.mapper;
 
+import com.prapps.retail.management.messaging.entities.ProductEntity;
 import com.prapps.retail.management.product.Product;
-import com.prapps.retail.management.product.entities.ProductEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 

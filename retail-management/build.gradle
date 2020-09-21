@@ -1,0 +1,23 @@
+group = "com.prapps.retail-management"
+version = "1.0"
+
+repositories {
+}
+
+dependencies {
+}
+
+task buildDockerImages(type: Exec) {
+    workingDir "$projectDir"
+    commandLine 'sh', './buildDockerImages.sh'
+}
+
+task helmInstall(type: Exec, dependsOn: buildDockerImages) {
+    workingDir "$projectDir"
+    commandLine 'sh', './helmInstall.sh'
+}
+
+task helmUninstall(type: Exec) {
+    workingDir "$projectDir"
+    commandLine 'sh', './helmUninstall.sh'
+}

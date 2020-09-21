@@ -1,9 +1,9 @@
-package com.prapps.retail.management.product.service;
+package com.prapps.retail.management.messaging.service;
 
+import com.prapps.retail.management.messaging.entities.ProductEntity;
+import com.prapps.retail.management.messaging.mapper.ProductMapper;
+import com.prapps.retail.management.messaging.repo.ProductRepo;
 import com.prapps.retail.management.product.Product;
-import com.prapps.retail.management.product.entities.ProductEntity;
-import com.prapps.retail.management.product.mapper.ProductMapper;
-import com.prapps.retail.management.product.repo.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
