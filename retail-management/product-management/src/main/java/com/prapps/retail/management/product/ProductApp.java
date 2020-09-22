@@ -3,7 +3,7 @@
  */
 package com.prapps.retail.management.product;
 
-import com.prapps.retail.management.messaging.service.ProductService;
+import com.prapps.retail.management.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

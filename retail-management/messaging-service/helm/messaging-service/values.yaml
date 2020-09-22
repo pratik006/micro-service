@@ -1,4 +1,5 @@
 kafka:
+  replicas: 1
   external:
     enabled: true
     type: NodePort
@@ -8,3 +9,4 @@ kafka:
     listener.security.protocol.map: |-
       PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
 
+BOOTSTARP_SERVERS: kafka:9092

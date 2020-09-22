@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${BOOTSTARP_SERVERS}
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:

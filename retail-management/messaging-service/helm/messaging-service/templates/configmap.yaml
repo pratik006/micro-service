@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: product-management-configmap
+  name: messaging-service-configmap

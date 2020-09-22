@@ -20,7 +20,7 @@ public class MessagingController {
     }
 
     @PostMapping("/send/{topicName}")
-    public void create(@PathVariable String topicName, @RequestBody MessagingRequest request) {
+    public void send(@PathVariable String topicName, @RequestBody MessagingRequest request) {
         messagingService.enqueue(topicName, request);
     }
 }

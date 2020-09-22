@@ -3,7 +3,7 @@
  */
 package com.prapps.retail.management.product;
 
-import com.prapps.retail.management.messaging.service.ProductService;
+import com.prapps.retail.management.product.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

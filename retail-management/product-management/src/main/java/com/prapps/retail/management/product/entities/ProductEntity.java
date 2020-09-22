@@ -1,4 +1,4 @@
-package com.prapps.retail.management.messaging.entities;
+package com.prapps.retail.management.product.entities;
 
 import lombok.Data;
 

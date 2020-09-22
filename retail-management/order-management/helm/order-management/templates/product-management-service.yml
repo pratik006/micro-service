@@ -53,7 +53,7 @@ spec:
     - name: http
       protocol: TCP
       # Which port on the node is the service available through?
-      nodePort: 32003
+      #nodePort: 32003
       # Inside the cluster, what port does the service expose?
       port: 8080
       # Which port do pods selected by this service expose?

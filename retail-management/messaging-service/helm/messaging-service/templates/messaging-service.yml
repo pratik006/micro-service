@@ -24,16 +24,8 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: DB_HOST
-              value: "{{ .Values.DB_HOST }}"
-            - name: DB_PORT
-              value: "{{ .Values.DB_PORT }}"
-            - name: POSTGRES_DB
-              value: "{{ .Values.POSTGRES_DB }}"
-            - name: POSTGRES_USER
-              value: "{{ .Values.POSTGRES_USER }}"
-            - name: POSTGRES_PASSWORD
-              value: "{{ .Values.POSTGRES_PASSWORD }}"
+            - name: BOOTSTARP_SERVERS
+              value: "{{ .Release.Name }}-{{ .Values.BOOTSTARP_SERVERS }}"
       #imagePullPolicy: IfNotPresent
 
 ---
@@ -55,3 +47,18 @@ spec:
       # Which port do pods selected by this service expose?
       targetPort: 8080
   type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testclient
+  #namespace: kafka
+spec:
+  containers:
+    - name: kafka
+      image: solsson/kafka:0.11.0.0
+      command:
+        - sh
+        - -c
+        - "exec tail -f /dev/null"

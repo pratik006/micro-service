@@ -1,7 +1,7 @@
 package com.prapps.retail.management.product;
 
 import com.prapps.retail.management.exception.ResourceNotFound;
-import com.prapps.retail.management.messaging.service.ProductService;
+import com.prapps.retail.management.product.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
